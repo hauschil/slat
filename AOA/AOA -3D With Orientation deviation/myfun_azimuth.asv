@@ -1,0 +1,13 @@
+function objective_function_azimuth = myfun_azimuth(x,deviation_orientation,xe,ye,ze,measured_angle_sensor_azimuth)% objective function
+
+X=xe-x(1);% xe-xs
+Y=ye-x(2);%ye-ys
+Z=ze-x(3);%ze-zs
+
+    A=(Y.*Y)+(X.*X);
+    azimuth_distance=sqrt(A);
+    azimuth_radians = atan2(azimuth_distance,Z);
+    azimuth_degrees =  azimuth_radians*(180/pi);
+    
+    objective_function_azimuth = measured_angle_sensor_azimuth - (azimuth_degrees + deviation_orientation)  %objective function azimuth
+end
