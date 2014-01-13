@@ -1,0 +1,13 @@
+function objective_function_elevation = myfun_elevation(x,xe,ye,measured_angle_sensor_elevation)% objective function
+
+ 
+  
+X=xe-x(1);% xe-xs
+Y=ye-x(2);%ye-ys
+
+    AOA_radians = atan2(Y,X);%radian angle calculation
+    AOA_degrees = AOA_radians*(180/pi);% degrees angle calculation
+    
+    objective_function_elevation = measured_angle_sensor_elevation- AOA_degrees% objective function
+    
+    end
