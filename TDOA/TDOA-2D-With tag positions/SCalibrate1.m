@@ -15,9 +15,9 @@ for m=1:p
     r0=sqrt((Sm(1,1)-Sc(n+m,1))^2+(Sm(1,2)-Sc(n+m,2))^2);
 end
 for j=1:n
-    for m=1:p
+    for k=1:p
         %r0=sqrt((Sm(1,1)-Sc(n+m,1))^2+(Sm(1,2)-Sc(n+m,2))^2);
-        r(j,p)=sqrt((Sc(j,1)-Sc(n+p,1))^2+(Sc(j,2)-Sc(n+p,2))^2);
+        r(j,k)=sqrt((Sc(j,1)-Sc(n+k,1))^2+(Sc(j,2)-Sc(n+k,2))^2);
     end
     ErrFun(j,:)=r0-r(j,:)-v*td(j,:);
 end
