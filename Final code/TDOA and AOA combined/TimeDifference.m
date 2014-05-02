@@ -9,7 +9,7 @@ rd=r0-r;
 % To add noise to the TDOA measurements, given mean and standard deviation
 % For noiseless measurements make the standard deviation as 0 in the
 % normrnd
-td= (rd/v)+(rd/v).*normrnd(0,1,[1,n])*0.1;
+td= (rd/v)+(rd/v).*normrnd(0,1,[1,n])*0;
 end
 
     

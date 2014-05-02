@@ -9,7 +9,7 @@ angles1=atan2((Ye-Ys),(Xe-Xs));
 % To add noise to the AOA measurements, given mean and standard deviation
 % For noiseless measurements make the standard deviation as 0 in the
 % normrnd
-angles=angles1-Orientation+normrnd(0,1,[1,n]);
+angles=angles1-Orientation+normrnd(0,1,[1,n])*0;
 end
 
 
