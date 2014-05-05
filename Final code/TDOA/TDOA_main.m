@@ -42,7 +42,7 @@ for i=2:no_sensors
 end
 %End of generation of simulation data.
 
-%% Case 1: Calibration of the sensors with known emitter positions 
+%% Case 1: Calibration of the sensors with known emitter positions
 %**************************************************************************
 
 %Master sensor which is calibrated manually
@@ -69,11 +69,17 @@ result=lsqnonlin(@(X)Sensor_Calibrate(X,S_master,time_diff,v,...
 disp('Sensor calibration results considering with known emitter positions')
 
 %Final result of the estimated sensors.
-Sensor_calibrated=result(1:no_sensors,:)
+Sensor_calibrated =result(1:no_sensors,:)
+Emitter_estimated=[;];
+
+%Plotting the calibrated sensor positions
+figure;
+plotting(no_sensors,Sensor_all,x_emitter,y_emitter,Sensor_calibrated,...
+    Emitter_estimated,1)
 
 %% Case 2: Simultaneous calibration and tracking
 %**************************************************************************
-% Splitting the known and unknown data 
+% Splitting the known and unknown data
 
 %Master sensor which is calibrated manually
 S_master=Sensor_all(1,:);
@@ -84,9 +90,12 @@ xt_known=[];
 yt_known=[];
 
 %to generate known data points given the percentage of known data points
-P= round(0.1*length(x_emitter));
+P= round(0.2*length(x_emitter));
 P= floor(length(x_emitter)/P);
-for s=1:P:length(x_emitter)-rem(length(x_emitter),P)
+for s=1:P:length(x_emitter)%-rem(length(x_emitter),P)
+    if s>length(x_emitter)
+        break
+    end
     xt_known(count)=x_emitter(1,s);
     yt_known(count)=y_emitter(1,s);
     td_known(:,count)=time_diff(:,s);
@@ -107,7 +116,7 @@ offset=0.5;
 % Initial guess for the sensor and emitter positions
 Sinit=[Sensor_all(2:end,:)+offset*rand([no_sensors,2])];
 posinit=[x_emitter(1,:)'+offset*rand([unknown,1]),...
-        y_emitter(1,:)'+offset*rand([unknown,1])];
+    y_emitter(1,:)'+offset*rand([unknown,1])];
 X0=[Sinit;posinit];
 
 % Calling the LSQNONLIN optimization solver
@@ -120,3 +129,6 @@ disp('The results for simulataneous calibration and tracking')
 %Final result of the estimated sensors and emitters
 Sensor_estimated=result(1:no_sensors,:)
 Emitter_estimated=result(no_sensors+1:end,:)
+figure;
+plotting(no_sensors,Sensor_all,x_emitter,y_emitter,Sensor_estimated,...
+    Emitter_estimated,2)
