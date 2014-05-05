@@ -92,7 +92,7 @@ yt_known=[];
 %to generate known data points given the percentage of known data points
 P= round(0.2*length(x_emitter));
 P= floor(length(x_emitter)/P);
-for s=1:P:length(x_emitter)%-rem(length(x_emitter),P)
+for s=1:P:length(x_emitter)
     if s>length(x_emitter)
         break
     end
