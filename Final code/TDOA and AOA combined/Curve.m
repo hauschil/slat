@@ -12,7 +12,7 @@ switch t
         
         %plot straight line
         plot(x,y,'+','MarkerSize',5)
-        title('Straight Line')
+        title('Path traversed by the emitter:straight Line')
         xlabel('X');
         ylabel('Y=f(X)');
         
@@ -24,7 +24,7 @@ switch t
         
         %plot the spline1
         plot(x,y,'+','MarkerSize',5)
-        title('Plot of spline1')
+        title('Path traversed by the emitter:spline')
         xlabel('X');
         ylabel('Y=f(X)');
         
@@ -35,7 +35,7 @@ switch t
         
         %Plot the spline2
         plot(x,y,'+','MarkerSize',5)
-        title('Plot of spline2')
+        title('Path traversed by the emitter:spline')
         xlabel('X');
         ylabel('Y=f(X)');
         
@@ -71,7 +71,7 @@ switch t
         
         %plot the hilbert's space filling curve
         plot(x, y,'x')
-        title('Plot of hilberts space filling curve')
+        title('Path traversed by the emitter:hilberts space filling curve')
         xlabel('X');
         ylabel('Y=f(X)');
         

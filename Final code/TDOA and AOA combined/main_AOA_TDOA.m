@@ -80,6 +80,10 @@ result = lsqnonlin(@(X)Calibrate_AOA_TDOA(X,S_master,no_sensors,v,...
 disp('Sensor calibration results considering with known emitter positions')
 Sensor_estimated=result(1:no_sensors,:)
 Orientation_estimated =result(no_sensors+1:2*no_sensors)
+Emitter_estimated=[;];
+figure;
+plotting(no_sensors,Sensor_all,x_emitter,y_emitter,Sensor_estimated,...
+        Orientation_estimated,Emitter_estimated,1)
 
 %% Case 2: Simultaneous calibration and tracking 
 
@@ -95,7 +99,10 @@ count=1;
 %p is the number of known data points
 P= round(0.1*length(x_emitter));
 P= floor(length(x_emitter)/P);
-for s=1:P:length(x_emitter)-rem(length(x_emitter),P)
+for s=1:P:length(x_emitter)
+    if s>length(x_emitter)
+        break
+    end
     xt_known(count)=x_emitter(1,s);
     yt_known(count)=y_emitter(1,s);
     td_known(:,count)=time_diff(:,s);
@@ -134,3 +141,6 @@ disp('The results for simulataneous calibration and tracking')
 Sensor_estimated=result(1:no_sensors,:)
 Orientation_estimated =result(no_sensors+1:2*no_sensors)
 Emitter_estimated=result(2*no_sensors+1:end,:)
+figure;
+plotting(no_sensors,Sensor_all,x_emitter,y_emitter,Sensor_estimated,...
+        Orientation_estimated,Emitter_estimated,2)
